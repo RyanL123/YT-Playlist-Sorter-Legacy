@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#link-input {
+    text-align: center;
+    margin: 5% 10%;
+}
+
+#link-input input {
+    padding: 16px 18px;
+    outline: none;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    -webkit-transition: border 200ms linear;
+    -ms-transition: border 200ms linear;
+    transition: border 200ms linear;
+}
+
+#link-input input[type=text] {
+    width: 50%;
+}
+
+#link-input input:hover {
+    border: 1px solid #1b6bf5;
+    -webkit-transition: border 200ms linear;
+    -ms-transition: border 200ms linear;
+    transition: border 200ms linear;
+}
