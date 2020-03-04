@@ -4,15 +4,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playlist Sorter</title>
     <link rel="stylesheet" href="global.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
     <div id="link-input">
         <form>
             <input type="text" placeholder="Playlist ID" id="playlist-id-input">
-            <input type="button" value="Search" onclick="getPlaylist()">
+            <input type="button" value="Search" onclick="generateSortedPlaylist()">
         </form>
     </div>
-    <div id="result"></div>
+    <div id="tutorial">
+        <a href="https://github.com/RyanL123/YT-Playlist-Sorter/blob/master/README.md" target=_blank>Tutorial</a>
+    </div>
+    <div id="result">
+        <table id="results-table"></table>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>

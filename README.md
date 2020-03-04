@@ -1,5 +1,6 @@
 # YT-Playlist-Sorter
 Sort any YouTube playlist based on selected attributes. Playlist does not have to necessarily be your own.
+**Currently, videos are only sorted by decreasing views. More sorting options will be implemented in the future. Furthermore, because of API limits, only the first 25 videos can be retrieved from the playlist.**
 
 # Requirements
 - Javascript must be enabled

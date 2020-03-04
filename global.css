@@ -1,11 +1,42 @@
+@font-face {
+    src: url("../Fonts//OpenSans-Light.ttf");
+    font-family: "OpenLight";
+}
+
 * {
     margin: 0;
     padding: 0;
+    font-family: OpenLight;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    -webkit-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    transition: color 200ms linear;
+}
+
+a:hover {
+    color: #1b6bf5;
+    -webkit-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    transition: color 200ms linear;
+}
+
+#tutorial {
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+#tutorial a {
+    font-size: 26px;
 }
 
 #link-input {
     text-align: center;
     margin: 5% 10%;
+    margin-bottom: 2%;
 }
 
 #link-input input {
@@ -29,4 +60,38 @@
     -webkit-transition: border 200ms linear;
     -ms-transition: border 200ms linear;
     transition: border 200ms linear;
+}
+
+#result {
+    text-align: center;
+    margin: 0% 10%;
+}
+
+#results-table {
+    width: 100%;
+}
+
+#results-table td {
+    padding: 1% 2.5%;
+}
+
+#results-table td:nth-child(1) {
+    text-align: left;
+}
+
+#results-table td:nth-child(2) {
+    text-align: right;
+}
+
+.vid-description {
+    margin: 0% 2%;
+    font-weight: lighter;
+}
+
+.vid-description a{
+    font-size: 26px;
+}
+
+.vid-description h2 {
+    color: #1b6bf5;
 }
