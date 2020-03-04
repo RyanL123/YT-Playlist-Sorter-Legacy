@@ -12,7 +12,7 @@ Sort any YouTube playlist based on selected attributes. The playlist does not ha
 
 1. Find the ID of the playlist you wish to sort on YouTube
 
-![Get playlist ID](playlistID.png)
+![Get playlist ID](Resources/playlistID.png)
 > In this case, the ID would be **PLqqbIIJ0YzpQZjvg_RPd0hX-nqloV8rmS**
 
 2. Click search
