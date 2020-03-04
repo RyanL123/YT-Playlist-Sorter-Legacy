@@ -22,7 +22,7 @@ function comp(a, b){
     return a.views - b.views;
 }
 
-function generateSortedPlaylist(){
+function generateSortedPlaylist(mode){
     var playlist = JSON.parse(getPlaylistJSON());
     var videos = [];
     for (var i = 0; i < playlist.items.length; i++){
@@ -37,7 +37,16 @@ function generateSortedPlaylist(){
             "video": playlist.items[i]
         });
     }
-    videos.sort(comp);
+    if (mode == "d"){
+        videos.sort(function comp(a, b){return a.views - b.views;});
+    }
+    else if (mode == "a"){
+        videos.sort(function comp(a, b){return b.views - a.views;});
+    }
+    return videos;
+}
+
+function writePlaylistsIntoDOM(videos){
     var container = document.getElementById("results-table");
     $("#results-table").empty();
     for (var i = 0; i < videos.length; i++){
@@ -60,4 +69,23 @@ function generateSortedPlaylist(){
         "</div>";
         image.innerHTML = "<img src=\"" + thumbnail + "\">"
     }
+}
+
+var playlist = [];
+
+function execute(){
+    var modeSelector = document.getElementById("order");
+    var mode = modeSelector.options[modeSelector.selectedIndex].value;
+    playlist = generateSortedPlaylist(mode);
+    writePlaylistsIntoDOM(playlist);
+}
+
+function rearrangeVideos(mode){
+    if (mode == "d"){
+        playlist.sort(function comp(a, b){return a.views - b.views;});
+    }
+    else if (mode == "a"){
+        playlist.sort(function comp(a, b){return b.views - a.views;});
+    }
+    writePlaylistsIntoDOM(playlist);
 }

@@ -39,6 +39,16 @@ a:hover {
     margin-bottom: 2%;
 }
 
+#link-input select {
+    outline: none;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    height: 60px;
+}
+
+
 #link-input input {
     padding: 16px 18px;
     outline: none;

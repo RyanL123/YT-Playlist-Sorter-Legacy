@@ -9,8 +9,12 @@
 <body>
     <div id="link-input">
         <form>
+            <select id="order" onchange="rearrangeVideos(this.value)">
+                <option value="a">Views Ascending</option>
+                <option value="d">Views Descending</option>
+            </select>
             <input type="text" placeholder="Playlist ID" id="playlist-id-input">
-            <input type="button" value="Search" onclick="generateSortedPlaylist()">
+            <input type="button" value="Search" onclick="execute()">
         </form>
     </div>
     <div id="tutorial">
