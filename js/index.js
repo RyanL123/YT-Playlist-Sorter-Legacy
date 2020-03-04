@@ -7,6 +7,21 @@ function getJSON(url){
     return xmlHttp.responseText;
 }
 
+function convertISOtoInt(ISODate){
+    date = new Date(ISODate);
+    return parseInt(date.getFullYear())*1000 + (parseInt(date.getMonth())+1)*100 + parseInt(date.getDate());
+}
+
+function convertISOtoString(ISODate){
+    date = new Date(ISODate);
+    year = parseInt(date.getFullYear());
+    month = parseInt(date.getMonth());
+    day = parseInt(date.getDate());
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return months[month] + " " + day + ", " + year;
+}
+
 function getPlaylistJSON(){
     var playlistID = document.getElementById("playlist-id-input").value;
     var playlist = getJSON("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Csnippet&maxResults=25&playlistId=" + playlistID + "&key=" + api_key);
@@ -37,6 +52,12 @@ function sortVideos(videos, mode){
     else if (mode == "da"){
         videos.sort(function comp(a, b){return b.dislikes - a.dislikes});
     }
+    else if (mode == "ud"){
+        videos.sort(function comp(a, b){return convertISOtoInt(a.uploadDate) - convertISOtoInt(b.uploadDate) })
+    }
+    else if (mode == "ua"){
+        videos.sort(function comp(a, b){return convertISOtoInt(b.uploadDate) - convertISOtoInt(a.uploadDate) })
+    }
 }
 
 function generateSortedPlaylist(mode){
@@ -47,6 +68,7 @@ function generateSortedPlaylist(mode){
         var videoID = vid.snippet.resourceId.videoId;
         var video = JSON.parse(getVideoStats(videoID)).items[0];
         var views = video.statistics.viewCount;
+        var uploadDate = video.snippet.publishedAt;
         var channel = video.snippet.channelTitle;
         var likes = video.statistics.likeCount;
         var dislikes = video.statistics.dislikeCount;
@@ -55,6 +77,7 @@ function generateSortedPlaylist(mode){
             "views": views,
             "likes": likes,
             "dislikes": dislikes,
+            "uploadDate": uploadDate,
             "channel": channel,
             "video": playlist.items[i]
         });
@@ -68,8 +91,9 @@ function writePlaylistsIntoDOM(videos){
     $("#results-table").empty();
     for (var i = 0; i < videos.length; i++){
         var views = videos[i].views.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        var likes = videos[i].likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
-        var dislikes = videos[i].dislikes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
+        var likes = videos[i].likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var dislikes = videos[i].dislikes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var uploadDate = videos[i].uploadDate;
         var video = videos[i].video;
         var title = video.snippet.title;
         var thumbnail = video.snippet.thumbnails.medium.url;
@@ -84,6 +108,7 @@ function writePlaylistsIntoDOM(videos){
         "<a href=\"" + link +"\" target=_blank>" + title + "</a>" + 
         "</h1>" +
         "<h2>" + channel + "</h2>" + 
+        "<h3> Upload Date: " + convertISOtoString(uploadDate) + "</h3>" +
         "<h3> Views: " + views + "</h3>" +
         "<h3> Likes: " + likes + "</h3>" +
         "<h3> Dislikes: " + dislikes + "</h3>" +
