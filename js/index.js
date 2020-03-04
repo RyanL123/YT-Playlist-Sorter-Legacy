@@ -18,8 +18,25 @@ function getVideoStats(videoID){
     return stats;
 }
 
-function comp(a, b){
-    return a.views - b.views;
+function sortVideos(videos, mode){
+    if (mode == "d"){
+        videos.sort(function comp(a, b){return a.views - b.views;});
+    }
+    else if (mode == "a"){
+        videos.sort(function comp(a, b){return b.views - a.views;});
+    }
+    else if (mode == "ld"){
+        videos.sort(function comp(a, b){return a.likes - b.likes});
+    }
+    else if (mode == "la"){
+        videos.sort(function comp(a, b){return b.likes - a.likes});
+    }
+    else if (mode == "dd"){
+        videos.sort(function comp(a, b){return a.dislikes - b.dislikes});
+    }
+    else if (mode == "da"){
+        videos.sort(function comp(a, b){return b.dislikes - a.dislikes});
+    }
 }
 
 function generateSortedPlaylist(mode){
@@ -28,21 +45,21 @@ function generateSortedPlaylist(mode){
     for (var i = 0; i < playlist.items.length; i++){
         var vid = playlist.items[i];
         var videoID = vid.snippet.resourceId.videoId;
-        var views = JSON.parse(getVideoStats(videoID)).items[0].statistics.viewCount;
-        var channel = JSON.parse(getVideoStats(videoID)).items[0].snippet.channelTitle;
+        var video = JSON.parse(getVideoStats(videoID)).items[0];
+        var views = video.statistics.viewCount;
+        var channel = video.snippet.channelTitle;
+        var likes = video.statistics.likeCount;
+        var dislikes = video.statistics.dislikeCount;
         views = parseInt(views);
         videos.push({
             "views": views,
+            "likes": likes,
+            "dislikes": dislikes,
             "channel": channel,
             "video": playlist.items[i]
         });
     }
-    if (mode == "d"){
-        videos.sort(function comp(a, b){return a.views - b.views;});
-    }
-    else if (mode == "a"){
-        videos.sort(function comp(a, b){return b.views - a.views;});
-    }
+    sortVideos(videos, mode);
     return videos;
 }
 
@@ -50,7 +67,9 @@ function writePlaylistsIntoDOM(videos){
     var container = document.getElementById("results-table");
     $("#results-table").empty();
     for (var i = 0; i < videos.length; i++){
-        var views = videos[i].views.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
+        var views = videos[i].views.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var likes = videos[i].likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
+        var dislikes = videos[i].dislikes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
         var video = videos[i].video;
         var title = video.snippet.title;
         var thumbnail = video.snippet.thumbnails.medium.url;
@@ -61,11 +80,13 @@ function writePlaylistsIntoDOM(videos){
         var image = row.insertCell(1);
         description.innerHTML = 
         "<div class=\"vid-description\">" +
-        "<h1>" + 
+        "<h1>" +    
         "<a href=\"" + link +"\" target=_blank>" + title + "</a>" + 
         "</h1>" +
         "<h2>" + channel + "</h2>" + 
         "<h3> Views: " + views + "</h3>" +
+        "<h3> Likes: " + likes + "</h3>" +
+        "<h3> Dislikes: " + dislikes + "</h3>" +
         "</div>";
         image.innerHTML = "<img src=\"" + thumbnail + "\">"
     }
@@ -78,14 +99,9 @@ function execute(){
     var mode = modeSelector.options[modeSelector.selectedIndex].value;
     playlist = generateSortedPlaylist(mode);
     writePlaylistsIntoDOM(playlist);
-}
+}   
 
 function rearrangeVideos(mode){
-    if (mode == "d"){
-        playlist.sort(function comp(a, b){return a.views - b.views;});
-    }
-    else if (mode == "a"){
-        playlist.sort(function comp(a, b){return b.views - a.views;});
-    }
+    sortVideos(playlist, mode);
     writePlaylistsIntoDOM(playlist);
 }
