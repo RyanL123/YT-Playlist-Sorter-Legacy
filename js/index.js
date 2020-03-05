@@ -1,5 +1,3 @@
-const api_key = "AIzaSyAgvRpnz1HdtHi4t8c4MgWneBay0HxAIcg"
-
 function getJSON(url){
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", url, false);
