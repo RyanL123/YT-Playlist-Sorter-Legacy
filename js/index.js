@@ -88,7 +88,6 @@ function generateSortedPlaylist(mode){
 
 function writePlaylistsIntoDOM(videos){
     var container = document.getElementById("result");
-    // $("#results-table").empty();
     for (var i = 0; i < videos.length; i++){
         var views = videos[i].views.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         var likes = videos[i].likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -99,11 +98,8 @@ function writePlaylistsIntoDOM(videos){
         var thumbnail = video.snippet.thumbnails.medium.url;
         var channel = videos[i].channel;
         var link = "https://www.youtube.com/watch?v=" + video.snippet.resourceId.videoId;
-        // var row = container.insertRow(0);
-        // var description = row.insertCell(0);
-        // var image = row.insertCell(1);
         container.innerHTML +=
-        "<div class=\"row\">" +
+        "<div class=\"row bg-light rounded mt-2 py-4 px-2\">" +
         "<div class=\"col-sm-8\">" +
         "<div class=\"vid-description\">" +
         "<h4>" +    
@@ -117,7 +113,7 @@ function writePlaylistsIntoDOM(videos){
         "</div>" +
         "</div>" +
         "<div class=\"col-sm-4\">" +
-        "<img class=\"rounded\" src=\"" + thumbnail + "\">" +
+        "<img class=\"rounded img-fluid mx-auto d-block\" src=\"" + thumbnail + "\">" +
         "</div>" +
         "</div>";
     }
