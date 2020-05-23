@@ -87,8 +87,8 @@ function generateSortedPlaylist(mode){
 }
 
 function writePlaylistsIntoDOM(videos){
-    var container = document.getElementById("results-table");
-    $("#results-table").empty();
+    var container = document.getElementById("result");
+    // $("#results-table").empty();
     for (var i = 0; i < videos.length; i++){
         var views = videos[i].views.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         var likes = videos[i].likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -99,10 +99,12 @@ function writePlaylistsIntoDOM(videos){
         var thumbnail = video.snippet.thumbnails.medium.url;
         var channel = videos[i].channel;
         var link = "https://www.youtube.com/watch?v=" + video.snippet.resourceId.videoId;
-        var row = container.insertRow(0);
-        var description = row.insertCell(0);
-        var image = row.insertCell(1);
-        description.innerHTML = 
+        // var row = container.insertRow(0);
+        // var description = row.insertCell(0);
+        // var image = row.insertCell(1);
+        container.innerHTML +=
+        "<div class=\"row\">" +
+        "<div class=\"col-sm-8\">" +
         "<div class=\"vid-description\">" +
         "<h4>" +    
         "<a href=\"" + link +"\" target=_blank>" + title + "</a>" + 
@@ -112,8 +114,12 @@ function writePlaylistsIntoDOM(videos){
         "<h5> Views: " + views + "</h5>" +
         "<h5> Likes: " + likes + "</h5>" +
         "<h5> Dislikes: " + dislikes + "</h5>" +
+        "</div>" +
+        "</div>" +
+        "<div class=\"col-sm-4\">" +
+        "<img class=\"rounded\" src=\"" + thumbnail + "\">" +
+        "</div>" +
         "</div>";
-        image.innerHTML = "<img class=\"rounded\" src=\"" + thumbnail + "\">"
     }
 }
 
