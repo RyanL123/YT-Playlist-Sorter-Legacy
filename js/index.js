@@ -59,6 +59,7 @@ function sortVideos(videos, mode){
 }
 
 function generateSortedPlaylist(mode){
+    document.getElementById("loading").style.display = "";
     var playlist = JSON.parse(getPlaylistJSON());
     var videos = [];
     for (var i = 0; i < playlist.items.length; i++){
@@ -81,6 +82,7 @@ function generateSortedPlaylist(mode){
         });
     }
     sortVideos(videos, mode);
+    document.getElementById("loading").style.display = "none";
     return videos;
 }
 
@@ -102,16 +104,16 @@ function writePlaylistsIntoDOM(videos){
         var image = row.insertCell(1);
         description.innerHTML = 
         "<div class=\"vid-description\">" +
-        "<h1>" +    
+        "<h4>" +    
         "<a href=\"" + link +"\" target=_blank>" + title + "</a>" + 
-        "</h1>" +
-        "<h2>" + channel + "</h2>" + 
-        "<h3> Upload Date: " + convertISOtoString(uploadDate) + "</h3>" +
-        "<h3> Views: " + views + "</h3>" +
-        "<h3> Likes: " + likes + "</h3>" +
-        "<h3> Dislikes: " + dislikes + "</h3>" +
+        "</h4>" +
+        "<h5>" + channel + "</h5>" + 
+        "<h5> Upload Date: " + convertISOtoString(uploadDate) + "</h5>" +
+        "<h5> Views: " + views + "</h5>" +
+        "<h5> Likes: " + likes + "</h5>" +
+        "<h5> Dislikes: " + dislikes + "</h5>" +
         "</div>";
-        image.innerHTML = "<img src=\"" + thumbnail + "\">"
+        image.innerHTML = "<img class=\"rounded\" src=\"" + thumbnail + "\">"
     }
 }
 

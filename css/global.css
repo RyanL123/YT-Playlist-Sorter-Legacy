@@ -12,16 +12,16 @@
 a {
     text-decoration: none;
     color: black;
-    -webkit-transition: color 200ms linear;
-    -ms-transition: color 200ms linear;
-    transition: color 200ms linear;
+    -webkit-transition: color 100ms linear;
+    -ms-transition: color 100ms linear;
+    transition: color 100ms linear;
 }
 
 a:hover {
     color: #1b6bf5;
-    -webkit-transition: color 200ms linear;
-    -ms-transition: color 200ms linear;
-    transition: color 200ms linear;
+    -webkit-transition: color 100ms linear;
+    -ms-transition: color 100ms linear;
+    transition: color 100ms linear;
 }
 
 #tutorial {
@@ -30,7 +30,7 @@ a:hover {
 }
 
 #tutorial a {
-    font-size: 26px;
+    font-size: 20px;
 }
 
 #link-input {
@@ -41,7 +41,8 @@ a:hover {
 
 #link-input select {
     outline: none;
-    font-size: 20px;
+    padding: 14px 18px;
+    font-size: 18px;
     background-color: white;
     border: 1px solid darkgray;
     border-radius: 10px;
@@ -50,15 +51,15 @@ a:hover {
 
 
 #link-input input {
-    padding: 16px 18px;
+    padding: 14px 18px;
     outline: none;
-    font-size: 20px;
+    font-size: 18px;
     background-color: white;
     border: 1px solid darkgray;
     border-radius: 10px;
-    -webkit-transition: border 200ms linear;
-    -ms-transition: border 200ms linear;
-    transition: border 200ms linear;
+    -webkit-transition: border 100ms linear;
+    -ms-transition: border 100ms linear;
+    transition: border 100ms linear;
 }
 
 #link-input input[type=text] {
@@ -67,9 +68,13 @@ a:hover {
 
 #link-input input:hover {
     border: 1px solid #1b6bf5;
-    -webkit-transition: border 200ms linear;
-    -ms-transition: border 200ms linear;
-    transition: border 200ms linear;
+    -webkit-transition: border 100ms linear;
+    -ms-transition: border 100ms linear;
+    transition: border 100ms linear;
+}
+
+#link-input input[type=button]:hover {
+    cursor: pointer;
 }
 
 #result {
