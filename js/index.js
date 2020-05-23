@@ -59,7 +59,6 @@ function sortVideos(videos, mode){
 }
 
 function generateSortedPlaylist(mode){
-    document.getElementById("loading").style.display = "";
     var playlist = JSON.parse(getPlaylistJSON());
     var videos = [];
     for (var i = 0; i < playlist.items.length; i++){
@@ -82,12 +81,12 @@ function generateSortedPlaylist(mode){
         });
     }
     sortVideos(videos, mode);
-    document.getElementById("loading").style.display = "none";
     return videos;
 }
 
 function writePlaylistsIntoDOM(videos){
     var container = document.getElementById("result");
+    container.innerHTML = "";
     for (var i = 0; i < videos.length; i++){
         var views = videos[i].views.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         var likes = videos[i].likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
