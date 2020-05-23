@@ -22,11 +22,3 @@ Sort any YouTube playlist based on selected attributes. The playlist does not ha
 4. Profit
 
 5. Select a sorting option (Default sorted by most views)
-
-# Contributing
-
-Any contribution to this project is welcomed. Below are a few features that are still missing:
-
-- Mobile site
-
-- Caching results
